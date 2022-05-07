@@ -37,31 +37,17 @@ struct Node
 class Solution
 {
     public:
-    bool path(Node* root ,int n,vector<Node*> &ans){
-        if(root==NULL) return false;
-        ans.push_back(root);
-        if(root->data==n){
-            return true;
-        }
-        if ((path(root->left,n,ans)) || (path(root->right,n,ans))) return true;
-        ans.pop_back();
-        return false;
-    }
+    
     //Function to return the lowest common ancestor in a Binary Tree.
     Node* lca(Node* root ,int n1 ,int n2 ){
        //Your code here 
-       vector<Node*> ans1,ans2;
-       path(root,n1,ans1);
-       path(root,n2,ans2);
-       int i=0;
-       while(i<ans1.size() && i<ans2.size() ){
-           auto x=ans1[i];
-           auto y=ans2[i];
-           if(x->data!=y->data) break;
-           i++;
-       }
-       return ans1[i-1];
-       
+       if(root==NULL) return NULL;
+       if(root->data==n1 || root->data==n2) return root;
+       Node* left=lca(root->left,n1,n2);
+       Node* right=lca(root->right,n1,n2);
+       if(!left) return right;
+       else if(!right) return left;
+       else return root;
     }
 };
 
