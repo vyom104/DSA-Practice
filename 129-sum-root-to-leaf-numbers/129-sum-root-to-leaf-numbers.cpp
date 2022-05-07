@@ -26,7 +26,7 @@ public:
         getpaths(root->right,ans,m);
  }
     int sumNumbers(TreeNode* root) {
-       int ans=0,curr=0;
+       int ans=0;
         getpaths(root,ans,0);
         return ans;
     }
